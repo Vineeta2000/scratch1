@@ -1,0 +1,29 @@
+<table>
+ 		<tr>
+ 			<th>Feedback</th>
+ 		</tr>
+ 		<% @comments.reverse.each do |comment| %>
+ 		<tr>
+ 			<td>
+ 				<%= comment.feedback %><br><strong><em> ~ by <%= comment.user.email %></em></strong>
+ 			</td>
+ 			<% if comment.user == current_user || current_user.role?.eql?("Admin") %>
+ 			<td><%= button_to "DELETE" ,destroy_comment_posts_path(post_id: @post.id , comment_id: comment.id),method: :delete ,remote: true %></td>
+ 			<% end %>
+ 			<td>
+	 			<div id = "like_<%= comment.id %>" >
+					<%= render "like", comment: comment  %>
+
+				</div>	
+ 			</td>
+ 			<tr>
+ 				<td>
+ 					<div id = "reply_<%= comment.id %>" >
+		 				<%= render "reply",comment: comment%>
+		 		    </div>
+ 				</td>	 			
+ 		     </tr>
+ 		</tr>
+ 		
+ 		<% end %>
+ 	</table>

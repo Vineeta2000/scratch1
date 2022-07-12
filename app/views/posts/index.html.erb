@@ -1,0 +1,41 @@
+<%#= form_with url: "/posts/search", method: :post do |form| %>
+  <%#= form.label :query, "Search for:" %>
+  <%#= form.text_field :query %>
+  <%#= form.submit "Search" %>
+<%# end %>
+<%#= render "form" %><p>
+<%= render "posts/form" %>
+
+<h2>Posts</h2>
+<% debugger %>
+<%# if @query==@posts %>
+<% if @posts.present? %>
+<br>
+<table>
+	<tr>
+		<th>Email</th>
+		<th>Caption</th>
+		<th>Category</th>
+		<th>Operations</th>
+	</tr>
+	<% @posts.each do |post| %>
+    <tr>
+    	<td><em><%= post.user.email %></em></td>
+    	<td><%= post.caption%></td>
+    	<td><%= post.category.name %></td>
+    	<% if post.user == current_user || current_user.role? == "Admin" %>
+	    	<td><%= button_to  "EDIT", edit_post_path(post),method: :get%></td>
+	    	<td><%= button_to  "DELETE", post_path(post),method: :delete%></td>
+	    <% end %>
+    		<td><%= button_to  "SHOW", post_path(post),method: :get%></td>
+    	
+    </tr>
+
+
+		<% end %>	
+</table>
+<% else %>
+<h3>Result not found</h3>
+<% end %>
+
+<%= button_to "Back", root_path ,method: :get  %>

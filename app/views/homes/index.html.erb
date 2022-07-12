@@ -1,0 +1,67 @@
+<html>
+<!-- <center> -->
+<head>
+<body>
+<div style="width: 100%;">
+<div style="width: 101%; height: 264px; float: left; background: pink;">
+<h1><marquee><strong><em>Viniii...</em></strong></marquee></h1>
+
+
+ <p class="navbar-text float-right">
+
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>
+  <br><br>
+  <h1 class = "text-center"
+  <%= render "posts/form" %></p>
+  <center>
+  <table>
+    <tr>
+      <td><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |</td>
+      <td><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></td>
+      <td><%= button_to "Posts" ,  posts_path ,method: :get %></td>
+      <td><%= button_to "Category",   categories_path ,method: :get %></td>
+    </tr>
+  </table>
+
+     <br> 
+     <br>
+  <div style="width: 101%; height: 510px; float: left; background: #6a978fcc;">
+  
+  <% if current_user.role?.eql?("Admin") %>
+  
+    <%= render "user" %>
+    <%#= button_to "Category",   categories_path ,method: :get %>
+  <%#= render "category" %>
+  <% else %>
+
+<table>
+
+  <tr>
+    
+    <th>Email</th>
+    <th>Role</th>
+  </tr>
+  
+  <tr>
+    <td><%= current_user.email %></td>
+    <td><%= current_user.role? %></td>
+  </tr>
+  </table>
+<%= link_to "New Post" ,  new_post_path %>
+
+  <% end %>
+
+  <!-- <br>
+  <h2>Posts</h2> -->
+  <%#= render "posts/post" %>
+  <%#= button_to "Posts" ,  posts_path ,method: :get %>
+
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
+</p>
+</div>
+</div>
+</center>

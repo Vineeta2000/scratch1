@@ -1,0 +1,6 @@
+<h><b>Search Post :~</h>
+<%= search_form_for(@query) do |f| %>
+    <%= f.search_field :caption_cont, placeholder: "Search Post.. ~ _ ~", minlength: 3 %>
+    <%= f.submit "Search"  %>
+<% end %>
+

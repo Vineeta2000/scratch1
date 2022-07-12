@@ -1,0 +1,37 @@
+<h1>Show Posts</h1>
+<div>
+	<strong>Email</strong>
+	<%= @post.user.email %>
+	</div>
+	<br>
+<div>
+	<strong>Caption</strong>
+	<%= @post.caption %>
+    <!-- loop for multiple photo -->
+	<% @photo.each do |photo| %>
+	<%= image_tag photo.avatar.url %>
+	<% end %>
+	<%= link_to "Back" , root_path%>
+	</div>
+    <!--  create comment -->
+	<%= form_with model: @comment ,url:  create_comment_posts_path, method: :post , remote: true do |form| %>
+
+	
+	<div>
+		<%= form.label :feedback %>
+		<%= form.text_field :feedback%>
+	</div>
+	
+	<%= form.hidden_field :post_id, value: @post.id %>
+	<div>
+		<%= form.submit "create comment" %>
+
+ 	</div>
+ 	<% end %>
+	<h2>Comments</h2>
+ 	<div id = "comment_lists">
+ 		<%= render "comment" %>
+ 	</div>
+ 
+	<%= link_to "Back", root_path%>
+

@@ -1,0 +1,18 @@
+
+<h2>Categories</h2>
+<table>
+	<tr>
+		<th>Category</th>
+		<%= link_to "new category" , new_category_path , method: :get %>
+	</tr>
+	
+	<% @category.each do |category| %>
+	<tr>
+		<td><%= category.name %></td>
+		<td><%= link_to "show" , category_path(category.id),method: :get %></td>
+		<td><%= link_to "delete" ,  category_path(category.id), method: :delete %></td>
+		<td><%= link_to "edit" , edit_category_path(category.id) %></td>
+	</tr>
+	<% end %>
+</table>
+<%= link_to "Back", root_path%>

@@ -1,0 +1,29 @@
+<h1>NEW Posts</h1>
+<%= form_with model: @post, url: posts_path, method: :post do |form| %>
+<div><strong>
+	<%= form.label :caption %> ~<br> </strong>
+	<%= form.text_field :caption %>
+</div>
+<div>
+		<%#= form.label :Category %>
+		
+		<!-- <select name="post[category_id]">
+		<option value=""></option>
+		<option value="9" selected="selected">Good</option>
+		<option value="10">Very Good</option>
+		<option value="11">Bad</option>
+		<option value="12">Very Bad</option>
+		
+		</select> -->
+
+		<%= form.select :category_id, options_from_collection_for_select(Category.all, "id", "name") %>
+	</div>
+ <div class="field">
+    <%= form.file_field :avatar ,multiple: true %>
+  </div>
+ 
+<div>
+	<%= form.submit "Save" %>
+</div>
+<% end %>
+<%= link_to "Back" , root_path %>

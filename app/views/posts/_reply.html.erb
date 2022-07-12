@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div {
+  margin-top: 18px;	  
+  
+	}
+</style>
+</head>
+
+<%= form_with model: @comments ,url:  create_reply_posts_path(parent_id: comment.id) ,method: :post  do |form| %>
+<div>
+	<%= form.text_field :feedback %>
+	<%= form.submit "reply" %>
+</div>
+
+<% end %>
+<center>
+<% comment.comments.each do |reply| %>
+<table>
+	<tr>
+		<td><b> -- <font color="DarkCyan"><%= reply.feedback %> ~by <%= reply.user.email %></font></b></td>
+
+		<% if reply.user == current_user || current_user.role?.eql?("Admin") %>
+
+		<body><td><div>
+			<%= button_to "DELETE",destroy_reply_posts_path(comment_id: reply.id,post_id: @post.id) ,method: :delete , remote: true %></div></td>
+		<% end %>
+	</tr>
+</table>
+<% end %>
+</center>
+</body>
+</html>
